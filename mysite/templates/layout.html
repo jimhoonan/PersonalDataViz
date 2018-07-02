@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+	<title>FB data visualization</title>
+</head>
+
+<body>
+	<header class="container center-align">
+		<h1>FB data visualization</h1>
+		<p><a href="{% url 'home' %}">Return to home</a></p>
+		{% if user.is_authenticated %}
+			<p><a href="{% url 'logout' %}">Log out</a></p>
+			{% else %}
+			<p><a href="{% url 'login' %}">Log in</a> | <a href="{% url 'signup' %}">Sign up</a></p>
+		{% endif %}
+	</header>
+
+	<div class="container">
+		{% block content %}
+		{% endblock %}
+	</div>
+
+</body>
+</html>

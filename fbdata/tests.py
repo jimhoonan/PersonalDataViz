@@ -83,7 +83,7 @@ class TestMessageGraphData(TestCase):
 		self.default_data = MessageGraph.get_message_data(self.user)
 
 		self.num_bins=50
-		self.max_convos=2
+		self.max_convos=1
 		self.configurable_data = MessageGraph.get_message_data(self.user,num_bins=self.num_bins,max_convos=self.max_convos)
 
 
@@ -97,7 +97,6 @@ class TestMessageGraphData(TestCase):
 		self.assertEqual(len(self.default_data[0]['values']),101)
 
 	def test_limit_num_conversations(self):
-		self.data = MessageGraph.get_message_data(self.user, max_convos=2, num_bins=50)
 		self.assertEqual(len(self.configurable_data),2)
 
 	def test_num_of_bins_is_configurable(self):

@@ -136,12 +136,25 @@ class MessageGraph():
 		min_time=agg['min_time__min'].timestamp()
 
 		bin_size = (max_time - min_time)/num_bins
+		others = []
 
-		for c in conversations[:max_convos]:
+		for i in range(len(conversations)):
 			entry = {}
-			entry['key'] = c.title
-			entry['values'] = MessageGraph.bin_messages(Message.objects.filter(conversation = c),min_time,bin_size,num_bins)
-			result.append(entry)
+			current_message_bins = MessageGraph.bin_messages(Message.objects.filter(conversation = conversations[i]),min_time,bin_size,num_bins)
+			if(i < max_convos):
+				entry['key'] = conversations[i].title
+				entry['values'] = current_message_bins
+				result.append(entry)
+			else:
+				if(i == max_convos):
+					others = current_message_bins
+				else:
+					for x in range(len(others)):
+						others[x][1] += current_message_bins[x][1]
+		
+		if(len(others) > 0):
+			result.append({'key':'Others','values':others})
+
 
 		return result
 

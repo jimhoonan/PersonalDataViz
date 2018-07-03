@@ -129,6 +129,9 @@ class MessageGraph():
 		agg = conversations.aggregate(Max('max_time'),Min('min_time'))
 		result = []
 
+		if(conversations.count() == 0):
+			return result
+
 		max_time= agg['max_time__max'].timestamp()
 		min_time=agg['min_time__min'].timestamp()
 

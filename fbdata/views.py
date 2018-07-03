@@ -20,8 +20,10 @@ def uploader(request):
 
 def graph(request):
 	data = MessageGraph.get_message_data(request.user)
-
-	return render(request,'fbdata/graph.html',{'data':mark_safe(json.dumps(data))})
+	if(len(data) > 0):
+		return render(request,'fbdata/graph.html',{'data':mark_safe(json.dumps(data))})
+	else:
+		return render(request,'fbdata/no_data.html')
 
 
 

@@ -21,6 +21,7 @@ from fbdata import views as fbdata_views
 
 
 urlpatterns = [
+    path('celery-progress/', include('celery_progress.urls')),
     path('admin/', admin.site.urls),
     path('fbdata/', include('fbdata.urls')),
     path('login/',auth_views.login,name='login'),

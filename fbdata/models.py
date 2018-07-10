@@ -8,6 +8,10 @@ import zipfile
 import json
 import math
 
+
+def user_directory_path(instance,filename):
+	return 'user_data/user_{0}/{1}'.format(instance.user.id, filename)
+
 class Person(models.Model):
 	name = models.CharField(max_length=200)
 
@@ -32,6 +36,18 @@ class Message(models.Model):
 	def __str__(self):
 		return '%s: %s' % (self.sender,self.content)
 
+class FileUpload(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+	timestamp = models.DateTimeField()
+	uploaded_file = models.FileField(upload_to=user_directory_path)
+
+
+
+class FileUploadCreator():
+
+	def create_file_upload(user,file):
+		time = timezone.make_aware(datetime.now(),timezone.get_current_timezone())
+		return FileUpload.objects.create(user=user,timestamp=time,uploaded_file=file)
 
 class Uploader():
 
@@ -101,6 +117,9 @@ class Uploader():
 				text = zip_ref.read(file)
 				data = json.loads(text)
 				Uploader.upload_single_conversation_json(data,user)
+	
+	def upload_from_FileUpload_record(file_upload_record):
+		Uploader.upload_from_zip(file_upload_record.uploaded_file,file_upload_record.user)
 
 
 class MessageGraph():

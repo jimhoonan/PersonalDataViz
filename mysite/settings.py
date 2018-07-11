@@ -32,7 +32,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'fbdata.apps.FbdataConfig',
-    'celery_progress',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

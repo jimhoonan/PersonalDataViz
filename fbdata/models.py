@@ -39,7 +39,7 @@ class Message(models.Model):
 class FileUpload(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	timestamp = models.DateTimeField()
-	uploaded_file = models.FileField(upload_to=user_directory_path)
+	uploaded_file = models.FileField(max_length=500,upload_to=user_directory_path)
 
 
 

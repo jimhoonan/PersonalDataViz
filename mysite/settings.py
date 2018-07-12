@@ -83,13 +83,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES ={
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fbdata',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT':'',
-        'CONN_MAX_AGE': 3000
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'personaldata',
+        'USER': 'postgres',
+        'PASSWORD': 'Biblical2dangerous!'
     }
 }
 

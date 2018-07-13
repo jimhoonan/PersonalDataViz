@@ -11,6 +11,7 @@ gunicorn = "*"
 django-heroku = "*"
 celery = "*"
 psycopg2 = "*"
+dj-database-url = "*"
 
 
 [requires]

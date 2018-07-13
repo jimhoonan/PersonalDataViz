@@ -5,7 +5,9 @@ from celery import Celery
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
 
-app = Celery('mysite', backend='amqp', broker='amqp://guest@localhost//')
+broker_url = os.environ.get('CLOUDAMQP_URL', 'amqp://guest:guest@localhost//')
+
+app = Celery('mysite', backend='amqp', broker=broker_url)
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.
 # - namespace='CELERY' means all celery-related configuration keys

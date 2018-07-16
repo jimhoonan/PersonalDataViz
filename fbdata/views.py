@@ -17,7 +17,9 @@ def uploader(request):
 	if request.method == 'POST' and request.FILES['myfile']:
 		myfile = request.FILES['myfile']
 		uploaded_file=FileUploadCreator.create_file_upload(request.user,myfile)
-		shared_upload_from_FileUpload.delay(uploaded_file.id)
+		#Removing to test without celery
+		#shared_upload_from_FileUpload.delay(uploaded_file.id)
+		Uploader.upload_from_zip(myfile,request.user)
 
 	return render(request, 'fbdata/uploader.html')
 	

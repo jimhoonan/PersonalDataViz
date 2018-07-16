@@ -76,16 +76,21 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES={}
-DATABASES['default'] = dj_database_url.config(default='postgres://localhost')
+print(dj_database_url.config(default='postgres://localhost'))
 
-# DATABASES ={
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'personaldata',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Biblical2dangerous!'
-#     }
-# }
+if(dj_database_url.config(default='postgres://localhost')['NAME'] == ''):
+    DATABASES ={
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'personaldata',
+            'USER': 'postgres',
+            'PASSWORD': 'Biblical2dangerous!'
+        }
+    }
+else:
+    DATABASES['default'] = dj_database_url.config(default='postgres://localhost')
+
+
 
 
 # Password validation
